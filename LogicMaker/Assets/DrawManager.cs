@@ -7,13 +7,14 @@ public class DrawManager : MonoBehaviour
     private Camera _cam;
     [SerializeField] private Line linePrefab;
 
-    private const float SNAP_DISTANCE = 2f;
+    private const float SNAP_DISTANCE = 0.6f;
 
     public const float RESOLUTION = 0.1f;
 
     private Line _currentLine;
 
     Vector2 mousePos;
+    GameObject startPin;
 
     public void Awake()
     {
@@ -35,9 +36,9 @@ public class DrawManager : MonoBehaviour
         {
             if (distance <= SNAP_DISTANCE)
             {
-                Debug.Log("Distance check true");
                 _currentLine = Instantiate(linePrefab, nearestPin.transform.position, Quaternion.identity);
-                Debug.Log("line instantiated");
+                _currentLine.TrySetPosition(nearestPin.transform.position);
+                startPin = nearestPin;
             }
             else
             {
@@ -48,9 +49,9 @@ public class DrawManager : MonoBehaviour
 
         if (Input.GetMouseButton(0) && _currentLine != null) _currentLine.TrySetPosition(mousePos);
 
-        if (Input.GetMouseButtonUp(0) && distance <= SNAP_DISTANCE && _currentLine != null)
+        if (Input.GetMouseButtonUp(0) && _currentLine != null)
         {
-            if (distance > SNAP_DISTANCE)
+            if (distance > SNAP_DISTANCE || nearestPin == startPin)
             {
                 CancelCurrentLine();
                 return;
@@ -64,7 +65,6 @@ public class DrawManager : MonoBehaviour
     {
         Destroy(_currentLine.gameObject);
         _currentLine = null;
-        Debug.Log("Cancelled");
     }
 
     private GameObject NearestPinFromMousePos(out float distance)
