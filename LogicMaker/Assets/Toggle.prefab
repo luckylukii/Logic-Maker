@@ -252,6 +252,7 @@ MonoBehaviour:
   pins:
   - {fileID: 4542430190656413750}
   image: {fileID: 1079717051918961593}
+  gameManager: {fileID: 0}
 --- !u!61 &1945585850899906466
 BoxCollider2D:
   m_ObjectHideFlags: 0

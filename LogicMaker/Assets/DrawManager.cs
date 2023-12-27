@@ -8,7 +8,7 @@ public class DrawManager : MonoBehaviour
     private Camera _cam;
     [SerializeField] private Line linePrefab;
 
-    private const float SNAP_DISTANCE = 0.6f;
+    private const float SNAP_DISTANCE = 0.3f;
 
     public const float RESOLUTION = 0.1f;
 
