@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer _renderer;
+    [HideInInspector] public Pin start, end;
 
     public void TrySetPosition(Vector2 pos)
     {

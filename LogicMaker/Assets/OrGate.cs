@@ -1,6 +1,4 @@
-using UnityEngine;
-
 public class OrGate : Gate
 {
-    public bool Execute(bool in1, bool in2) => in1 | in2;
+    public void Update() => pins[2].powerState = (PowerState)((int)pins[0].powerState | (int)pins[1].powerState);
 }

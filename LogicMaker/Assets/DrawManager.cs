@@ -38,6 +38,7 @@ public class DrawManager : MonoBehaviour
             {
                 _currentLine = Instantiate(linePrefab, nearestPin.transform.position, Quaternion.identity);
                 _currentLine.TrySetPosition(nearestPin.transform.position);
+                SetCurrentLinePin(nearestPin.GetComponent<Pin>());
                 startPin = nearestPin;
             }
             else
@@ -51,7 +52,12 @@ public class DrawManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && _currentLine != null)
         {
-            if (distance > SNAP_DISTANCE || nearestPin == startPin)
+            SetCurrentLinePin(nearestPin.GetComponent<Pin>());
+
+            //Checks if start or end is null (that means either two inputs or two ouputs are connected)
+            bool invalidWire = _currentLine.start == null || _currentLine.end == null;
+
+            if (distance > SNAP_DISTANCE || nearestPin == startPin || invalidWire)
             {
                 CancelCurrentLine();
                 return;
@@ -82,5 +88,16 @@ public class DrawManager : MonoBehaviour
         }
 
         return current;
+    }
+    private void SetCurrentLinePin(Pin pin)
+    {
+        if (pin.pinType == PinType.Input)
+        {
+            _currentLine.end = pin;
+        }
+        else if (pin.pinType == PinType.Output)
+        {
+            _currentLine.start = pin;
+        }
     }
 }
