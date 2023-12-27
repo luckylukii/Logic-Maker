@@ -4,6 +4,13 @@ public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer _renderer;
     [HideInInspector] public Pin start, end;
+    [HideInInspector] public PowerState powerState;
+
+    private void Update()
+    {
+        if (start != null) powerState = start.powerState;
+        if (end != null) end.powerState = powerState;
+    }
 
     public void TrySetPosition(Vector2 pos)
     {

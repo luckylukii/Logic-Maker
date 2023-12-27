@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class DrawManager : MonoBehaviour
 {
@@ -25,10 +26,11 @@ public class DrawManager : MonoBehaviour
     {
         mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
 
-        HandleLines();
+        if (Input.GetKey(KeyCode.LeftControl)) HandleErasing();
+        else HandleLines();
     }
 
-    public void HandleLines()
+    private void HandleLines()
     {
         GameObject nearestPin = NearestPinFromMousePos(out float distance);
 
@@ -99,5 +101,33 @@ public class DrawManager : MonoBehaviour
         {
             _currentLine.start = pin;
         }
+    }
+
+    private void HandleErasing()
+    {
+        if (!Input.GetMouseButtonDown(0))
+            return;
+
+        //save performance by returning if left mouse not pressed
+        float nearestDistance = float.MaxValue;
+        GameObject nearestLine = null;
+        
+        foreach (var line in GameObject.FindGameObjectsWithTag("Wire"))
+        {
+            var rend = line.GetComponent<LineRenderer>();
+            for (int i = 0; i < rend.positionCount; i++)
+            {
+                Vector3 position = rend.GetPosition(i);
+
+                float dist = Vector2.Distance(mousePos, position);
+                if (dist < nearestDistance)
+                { 
+                    nearestDistance = dist;
+                    nearestLine = line;
+                }
+            }
+        }
+
+        if (nearestDistance <= SNAP_DISTANCE) Destroy(nearestLine);
     }
 }
