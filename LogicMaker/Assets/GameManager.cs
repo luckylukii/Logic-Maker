@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
                 wire.GetComponent<LineRenderer>().colorGradient = lowPowerGrad;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.C))
+            SpawnCustomGate();
     }
 
     [ContextMenu("Spawn Custom")]

@@ -52,9 +52,9 @@ public class CustomGate : Gate
     }
     private void InitPins()
     {
-        float inputPinYStartPos = -CalculateYPosOffset(numInputPins - 1) / 2;
+        float inputPinYStartPos = CalculateYPosOffset(numInputPins - 1) / 2;
 
-        float outputPinYStartPos = -CalculateYPosOffset(numOutputPins - 1) / 2;
+        float outputPinYStartPos = CalculateYPosOffset(numOutputPins - 1) / 2;
 
         pins = new Pin[numInputPins + numOutputPins];
 
@@ -73,7 +73,7 @@ public class CustomGate : Gate
             //Positions
             float start = isInputPin ? inputPinYStartPos : outputPinYStartPos;
 
-            float y = start + (isInputPin ? CalculateYPosOffset(i) : CalculateYPosOffset(i - numInputPins));
+            float y = start - (isInputPin ? CalculateYPosOffset(i) : CalculateYPosOffset(i - numInputPins));
 
             float xPos = isInputPin ? PIN_INPUT_POSITION_X : PIN_OUTPUT_POSITION_X;
             pins[i].transform.localPosition = new Vector2(xPos, y);
