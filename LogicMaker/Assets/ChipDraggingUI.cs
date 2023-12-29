@@ -20,8 +20,7 @@ public class ChipDraggingUI : MonoBehaviour
 
         foreach (var chip in gates)
         {
-            var mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GatePreview prev = Instantiate(previewPrefab, mousePos, Quaternion.identity, parent);
+            GatePreview prev = Instantiate(previewPrefab, parent);
             prev.nameText.text = chip.chipName;
             prev.associatedPrefab = chip.GetComponent<Dragable>();
         }
