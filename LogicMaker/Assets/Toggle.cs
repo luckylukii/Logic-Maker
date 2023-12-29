@@ -1,21 +1,18 @@
 using UnityEngine;
+
 [RequireComponent(typeof(Collider2D))]
 public class Toggle : Gate
 {
-    [SerializeField] private OutputLight oLight;
     public PowerState powerState;
 
     private void OnMouseDown()
     {
-        switch (powerState)
+        powerState = powerState switch
         {
-            case PowerState.HIGH:
-                powerState = PowerState.LOW;
-                break;
-            case PowerState.LOW:
-                powerState = PowerState.HIGH;
-                break;
-        }
+            PowerState.HIGH => PowerState.LOW,
+            PowerState.LOW => PowerState.HIGH,
+            _ => PowerState.LOW
+        };
         pins[0].powerState = powerState;
     }
 }
