@@ -29,6 +29,7 @@ public class CustomGate : Gate
     public void Init(int numInputPins, int numOutputPins, string name, Dictionary<PowerState[], PowerState[]> thruthTable)
     {
         nameText.text = name;
+        chipName = name;
 
         this.thruthTable = new(thruthTable, new PowerStateComparer());
 

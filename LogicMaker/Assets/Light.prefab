@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pins:
   - {fileID: 406893763300862082}
+  chipName: light
   image: {fileID: 3471130531468307520}
 --- !u!61 &3481526934160424876
 BoxCollider2D:

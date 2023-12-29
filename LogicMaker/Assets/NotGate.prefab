@@ -510,6 +510,7 @@ MonoBehaviour:
   pins:
   - {fileID: 6934238187423230049}
   - {fileID: 5195487934544543878}
+  chipName: not
 --- !u!61 &1320267115444656969
 BoxCollider2D:
   m_ObjectHideFlags: 0

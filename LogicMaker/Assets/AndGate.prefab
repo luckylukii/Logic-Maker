@@ -512,6 +512,7 @@ MonoBehaviour:
   - {fileID: 1210014809412813671}
   - {fileID: 8598192884494368661}
   - {fileID: 5237460894711367910}
+  chipName: and
 --- !u!61 &8368311876569624216
 BoxCollider2D:
   m_ObjectHideFlags: 0

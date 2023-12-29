@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pins:
   - {fileID: 4542430190656413750}
+  chipName: toggle
   powerState: 0
 --- !u!114 &7551616941962101610
 MonoBehaviour:
@@ -308,4 +309,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pins:
   - {fileID: 4542430190656413750}
+  chipName: toggle
   image: {fileID: 1079717051918961593}

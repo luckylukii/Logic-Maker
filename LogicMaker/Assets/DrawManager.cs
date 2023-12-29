@@ -34,6 +34,8 @@ public class DrawManager : MonoBehaviour
     {
         GameObject nearestPin = NearestPinFromMousePos(out float distance);
 
+        if (nearestPin == null) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (distance <= SNAP_DISTANCE)
@@ -77,19 +79,28 @@ public class DrawManager : MonoBehaviour
 
     private GameObject NearestPinFromMousePos(out float distance)
     {
-        GameObject current = GameObject.FindGameObjectsWithTag("Pin")[0];
-        distance = Vector2.Distance(mousePos, current.transform.position);
-        foreach (var pin in GameObject.FindGameObjectsWithTag("Pin"))
+        try
         {
-            float dist = Vector2.Distance(mousePos, pin.transform.position);
-            if (dist < distance)
+            GameObject current = GameObject.FindGameObjectsWithTag("Pin")[0];
+            distance = Vector2.Distance(mousePos, current.transform.position);
+            foreach (var pin in GameObject.FindGameObjectsWithTag("Pin"))
             {
-                current = pin;
-                distance = dist;
+                float dist = Vector2.Distance(mousePos, pin.transform.position);
+                if (dist < distance)
+                {
+                    current = pin;
+                    distance = dist;
+                }
             }
-        }
 
-        return current;
+            return current;
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            distance = 0f;
+            return null;
+        }
+        
     }
     private void SetCurrentLinePin(Pin pin)
     {
