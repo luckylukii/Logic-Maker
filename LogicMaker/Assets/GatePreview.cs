@@ -3,11 +3,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GatePreview : MonoBehaviour, IPointerDownHandler
+public class GatePreview : MonoBehaviour, IPointerClickHandler
 {
     public TMP_Text nameText;
     public Image img;
-    [System.NonSerialized] public Dragable associatedPrefab;
+    [System.NonSerialized] public Gate associatedPrefab;
 
-    public void OnPointerDown(PointerEventData eventData) => Instantiate(associatedPrefab);
+    public void OnPointerClick(PointerEventData eventData) => Instantiate(associatedPrefab);
 }

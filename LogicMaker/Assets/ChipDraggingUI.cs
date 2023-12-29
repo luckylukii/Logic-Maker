@@ -7,10 +7,20 @@ public class ChipDraggingUI : MonoBehaviour
     [SerializeField] private GatePreview previewPrefab;
     [SerializeField] private List<Gate> gates = new();
 
+    [Header("DEBUG")]
+    [SerializeField] private Gate gateToAdd;
+
+    [ContextMenu("Add debug gate")]
+    public void AddDebugGate() => AddChip(gateToAdd);
+
     private void Awake() => Refresh();
 
-    public void AddChip(Gate chip) => gates.Add(chip);
-    public void Refresh()
+    public void AddChip(Gate chip)
+    {
+        gates.Add(chip);
+        Refresh();
+    }
+    private void Refresh()
     {
         //Destroy children
         while (parent.childCount > 0)
@@ -22,7 +32,7 @@ public class ChipDraggingUI : MonoBehaviour
         {
             GatePreview prev = Instantiate(previewPrefab, parent);
             prev.nameText.text = chip.chipName;
-            prev.associatedPrefab = chip.GetComponent<Dragable>();
+            prev.associatedPrefab = chip;
         }
     }
 }
