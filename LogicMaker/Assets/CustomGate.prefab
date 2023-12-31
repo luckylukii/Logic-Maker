@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pins: []
+  chipName: 
   graphicsObject: {fileID: 2883685420431887735}
   nameText: {fileID: 3711276301643063646}
   pinPrefab: {fileID: 946997753363552405, guid: 3296a9dcf62ed334ab6305dd58cf8a3f, type: 3}
@@ -292,7 +293,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: dsa
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -319,7 +320,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6.7
+  m_fontSize: 6
   m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 1

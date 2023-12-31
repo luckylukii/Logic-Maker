@@ -43,7 +43,6 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Spawn Custom")]
     public void SpawnCustomGate()
     {
-        //This is an or gate
         System.Collections.Generic.Dictionary<PowerState[], PowerState[]> thruthTable = new();
         for (int i = 0; i < inputsArr.Length; i++)
         {

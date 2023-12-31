@@ -7,12 +7,6 @@ public class ChipDraggingUI : MonoBehaviour
     [SerializeField] private GatePreview previewPrefab;
     [SerializeField] private List<Gate> gates = new();
 
-    [Header("DEBUG")]
-    [SerializeField] private Gate gateToAdd;
-
-    [ContextMenu("Add debug gate")]
-    public void AddDebugGate() => AddChip(gateToAdd);
-
     private void Awake() => Refresh();
 
     public void AddChip(Gate chip)

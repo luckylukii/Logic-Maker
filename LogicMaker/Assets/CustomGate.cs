@@ -42,6 +42,26 @@ public class CustomGate : Gate
         InitPins();
 
         initialized = true;
+
+        DebugLogThruthTable();
+    }
+    private void DebugLogThruthTable()
+    {
+        Debug.Log("THRUTH TABLE:");
+        foreach (KeyValuePair<PowerState[], PowerState[]> item in thruthTable)
+        {
+            string key = "";
+            foreach (var item1 in item.Key)
+            {
+                key += item1 + ", ";
+            }
+            string value = "";
+            foreach (var item1 in item.Value)
+            {
+                value += item1 + ", ";
+            }
+            Debug.Log($"ThruthTable item: Key: {key} Value: {value}");
+        }
     }
     private void FitSize()
     {

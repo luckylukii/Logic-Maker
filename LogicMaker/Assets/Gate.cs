@@ -7,6 +7,10 @@ public class Gate : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (Input.GetKey(KeyCode.LeftControl)) Destroy(gameObject);
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            ////GatePreview.numInstantiated--;
+            Destroy(gameObject);
+        }
     }
 }
