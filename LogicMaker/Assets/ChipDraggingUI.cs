@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class ChipDraggingUI : MonoBehaviour
 {
-    [SerializeField] private Transform parent;
+    [SerializeField] private Transform uiParent;
+    [SerializeField] private Transform chipParent;
     [SerializeField] private GatePreview previewPrefab;
     [SerializeField] private List<Gate> gates = new();
 
@@ -17,16 +18,17 @@ public class ChipDraggingUI : MonoBehaviour
     private void Refresh()
     {
         //Destroy children
-        while (parent.childCount > 0)
+        while (uiParent.childCount > 0)
         {
-            DestroyImmediate(parent.GetChild(0).gameObject);
+            DestroyImmediate(uiParent.GetChild(0).gameObject);
         }
 
         foreach (var chip in gates)
         {
-            GatePreview prev = Instantiate(previewPrefab, parent);
+            GatePreview prev = Instantiate(previewPrefab, uiParent);
             prev.nameText.text = chip.chipName;
             prev.associatedPrefab = chip;
+            prev.parent = chipParent;
         }
     }
 }

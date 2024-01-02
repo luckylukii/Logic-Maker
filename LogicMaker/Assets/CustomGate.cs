@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class CustomGate : Gate
 {
     private const float PIN_DISTRIBUTION_LENGTH = 0.5f;
@@ -11,6 +12,8 @@ public class CustomGate : Gate
     private const float PIN_OUTPUT_POSITION_X = 1;
 
     private const float GRAPHIC_SIZE_MIN = 0.75f;
+
+    private const float COLLIDER_SCALE_REDUCTION_X = 0.3f;
 
     //Serialized Fields for assigning on prefab
     [SerializeField] private Transform graphicsObject;
@@ -67,9 +70,13 @@ public class CustomGate : Gate
     {
         Vector3 newScale = graphicsObject.transform.localScale;
 
+        Vector2 colliderScale = newScale;
+        colliderScale.x -= COLLIDER_SCALE_REDUCTION_X;
+
         newScale.y = Mathf.Max(GRAPHIC_SIZE_MIN, CalculateYPosOffset(biggerSide));
 
         graphicsObject.transform.localScale = newScale;
+        GetComponent<BoxCollider2D>().size = colliderScale;
     }
     private void InitPins()
     {

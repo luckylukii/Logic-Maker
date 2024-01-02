@@ -234,6 +234,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116098369}
   m_CullTransparentMesh: 1
+--- !u!1 &122733615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 122733616}
+  m_Layer: 0
+  m_Name: ChipArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &122733616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122733615}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265292060
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +1031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fc01b1bd3621c409af99f82345b22d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 1611562041}
+  uiParent: {fileID: 1611562041}
+  chipParent: {fileID: 122733616}
   previewPrefab: {fileID: 5540158082321461069, guid: bc55a240f2d4a6b4cba9ec917fcea91b, type: 3}
   gates:
   - {fileID: 8655050155115948819, guid: 9673e3eaf6c2bb6449c7ccc6151af630, type: 3}
@@ -1875,5 +1907,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 2081499185}
   - {fileID: 265292062}
+  - {fileID: 122733616}
   - {fileID: 551131932}
   - {fileID: 1051232254}
