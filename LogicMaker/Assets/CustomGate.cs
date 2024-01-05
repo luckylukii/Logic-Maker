@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -15,133 +14,115 @@ public class CustomGate : Gate
 
     private const float COLLIDER_SCALE_REDUCTION_X = 0.3f;
 
-    //Serialized Fields for assigning on prefab
+    [System.NonSerialized] new public ConnectingPin[] pins;
+
     [SerializeField] private Transform graphicsObject;
     [SerializeField] private TMP_Text nameText;
-    [SerializeField] private GameObject pinPrefab;
-
-    public Dictionary<PowerState[], PowerState[]> thruthTable;
-
-    private bool initialized = false;
+    [SerializeField] private ConnectingPin pinPrefab;
 
     private int numInputPins = 0;
     private int numOutputPins = 0;
+    private Toggle[] inputs;
+    private OutputLight[] outputs;
 
-    private int biggerSide;
-
-    public void Init(int numInputPins, int numOutputPins, string name, Dictionary<PowerState[], PowerState[]> thruthTable)
+    public void Init(Toggle[] inputs, OutputLight[] outputs, string name)
     {
         nameText.text = name;
         chipName = name;
 
-        this.thruthTable = new(thruthTable, new PowerStateComparer());
+        numInputPins = inputs.Length;
+        numOutputPins = outputs.Length;
 
-        this.numInputPins = numInputPins;
-        this.numOutputPins = numOutputPins;
-
-        biggerSide = Mathf.Max(numInputPins, numOutputPins);
+        this.inputs = inputs;
+        this.outputs = outputs;
 
         FitSize();
         InitPins();
-
-        initialized = true;
-
-        DebugLogThruthTable();
+        MoveGates(); // This needs to be called after InitPins()
+        ResetChipOutIn();
     }
-    private void DebugLogThruthTable()
+    private void MoveGates()
     {
-        Debug.Log("THRUTH TABLE:");
-        foreach (KeyValuePair<PowerState[], PowerState[]> item in thruthTable)
+        Converter<ConnectingPin, SpriteRenderer> conv = new((c) => c.GetComponent<SpriteRenderer>());
+        SpriteRenderer[] rends = Array.ConvertAll(pins, conv);
+        renderers.AddRange(rends);
+
+        // hacky solution but I can't be bothered to find a good way
+        // unity transforms are weird
+        while (transform.parent.childCount > 1)
         {
-            string key = "";
-            foreach (var item1 in item.Key)
+            foreach (Transform child in transform.parent)
             {
-                key += item1 + ", ";
+                child.GetComponent<ToggleableGraphics>().SetGraphicsActive(false);
+
+                child.SetParent(transform);
             }
-            string value = "";
-            foreach (var item1 in item.Value)
-            {
-                value += item1 + ", ";
-            }
-            Debug.Log($"ThruthTable item: Key: {key} Value: {value}");
         }
     }
     private void FitSize()
     {
         Vector3 newScale = graphicsObject.transform.localScale;
 
+        newScale.y = Mathf.Max(GRAPHIC_SIZE_MIN, CalculateYPosOffset(Mathf.Max(numInputPins, numOutputPins)));
+
         Vector2 colliderScale = newScale;
         colliderScale.x -= COLLIDER_SCALE_REDUCTION_X;
-
-        newScale.y = Mathf.Max(GRAPHIC_SIZE_MIN, CalculateYPosOffset(biggerSide));
 
         graphicsObject.transform.localScale = newScale;
         GetComponent<BoxCollider2D>().size = colliderScale;
     }
+    private void ResetChipOutIn()
+    {
+        var gen = CustomChipGenerator.Instance;
+        gen.inputs.Clear();
+        gen.outputs.Clear();
+    }
     private void InitPins()
     {
         float inputPinYStartPos = CalculateYPosOffset(numInputPins - 1) / 2;
-
         float outputPinYStartPos = CalculateYPosOffset(numOutputPins - 1) / 2;
 
-        pins = new Pin[numInputPins + numOutputPins];
+        pins = new ConnectingPin[numInputPins + numOutputPins];
 
-        for (int i = 0; i < numInputPins + numOutputPins; i++)
-        {
-            //Values
-            pins[i] = Instantiate(pinPrefab, transform).GetComponent<Pin>();
-
-            bool isInputPin = i < numInputPins;
-
-            pins[i].connected = this;
-            pins[i].connectionIndex = i;
-
-            pins[i].pinType = isInputPin ? PinType.Input : PinType.Output;
-
-            //Positions
-            float start = isInputPin ? inputPinYStartPos : outputPinYStartPos;
-
-            float y = start - (isInputPin ? CalculateYPosOffset(i) : CalculateYPosOffset(i - numInputPins));
-
-            float xPos = isInputPin ? PIN_INPUT_POSITION_X : PIN_OUTPUT_POSITION_X;
-            pins[i].transform.localPosition = new Vector2(xPos, y);
-        }
-    }
-    private float CalculateYPosOffset(float i) => i * PIN_DISTRIBUTION_LENGTH;
-
-    private void Update()
-    {
-        if (!initialized)
-            return;
-
-        PowerState[] currentInput = new PowerState[numInputPins];
+        // Input Pins
         for (int i = 0; i < numInputPins; i++)
         {
-            currentInput[i] = pins[i].powerState;
+            pins[i] = Instantiate(pinPrefab, transform);
+
+            inputs[i].IsInGate = true;
+
+            CalculatePinPosition(i, inputPinYStartPos, PIN_INPUT_POSITION_X);
+
+            pins[i].connectionIndex = i;
+
+            pins[i].connected = inputs[i].hiddenInput;
+
+            pins[i].pinType = PinType.Input;
         }
 
+        // Output Pins
         for (int i = 0; i < numOutputPins; i++)
         {
-            try
-            {
-                pins[i + numInputPins].powerState = thruthTable[currentInput][i];
-            }
-            catch (KeyNotFoundException)
-            {
-                Debug.LogWarning("Thruth table generation not complete");
-            }
+            int j = i + numInputPins;
+
+            pins[j] = Instantiate(pinPrefab, transform);
+
+            inputs[i].IsInGate = true;
+
+            CalculatePinPosition(i, outputPinYStartPos, PIN_OUTPUT_POSITION_X);
+
+            pins[j].connectionIndex = j;
+
+            pins[j].connected = outputs[i].hiddenOutput;
+
+            pins[j].pinType = PinType.Output;
         }
     }
-}
-class PowerStateComparer : IEqualityComparer<PowerState[]>
-{
-    public bool Equals(PowerState[] obj1, PowerState[] obj2)
+    private void CalculatePinPosition(int i, float startPosY, float xPos)
     {
-        return StructuralComparisons.StructuralEqualityComparer.Equals(obj1, obj2);
-    }
+        float y = startPosY - CalculateYPosOffset(i);
 
-    public int GetHashCode(PowerState[] obj)
-    {
-        return StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj);
+        pins[i].transform.localPosition = new Vector2(xPos, y);
     }
+    private float CalculateYPosOffset(float i) => i * PIN_DISTRIBUTION_LENGTH;
 }

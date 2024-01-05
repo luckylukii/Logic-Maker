@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   connected: {fileID: 5927442778064782077}
   connectionIndex: 0
   powerState: 0
@@ -185,6 +186,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3955793421444443216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3534571155886678700}
+  - component: {fileID: 6621324407150328631}
+  m_Layer: 0
+  m_Name: HiddenInputPin
+  m_TagString: Pin
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3534571155886678700
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955793421444443216}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8159275613167639765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6621324407150328631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955793421444443216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 0
+  connected: {fileID: 5927442778064782077}
+  connectionIndex: 1
+  powerState: 0
+  pinType: 0
 --- !u!1 &6599879127441832616
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3534571155886678700}
   - {fileID: 433218501343630301}
   - {fileID: 1504384492487369539}
   m_Father: {fileID: 0}
@@ -291,10 +342,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9caeda3a8dfbf444b0ee6fc5f2a5f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 2301753449296647565}
+  - {fileID: 1079717051918961593}
   pins:
   - {fileID: 4542430190656413750}
   chipName: toggle
   powerState: 0
+  hiddenInput: {fileID: 6621324407150328631}
 --- !u!114 &7551616941962101610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c4639319462d44c870793e9db0befe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers: []
   pins:
   - {fileID: 4542430190656413750}
   chipName: toggle
   image: {fileID: 1079717051918961593}
+  hiddenOutput: {fileID: 4542430190656413750}
+  IsInGate: 0

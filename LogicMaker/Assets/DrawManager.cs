@@ -34,7 +34,7 @@ public class DrawManager : MonoBehaviour
     {
         GameObject nearestPin = NearestPinFromMousePos(out float distance);
 
-        if (nearestPin == null) return;
+        if (nearestPin == null || !nearestPin.GetComponent<Pin>().interactable) return;
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -8,6 +8,11 @@ public class ChipDraggingUI : MonoBehaviour
     [SerializeField] private GatePreview previewPrefab;
     [SerializeField] private List<Gate> gates = new();
 
+    public Transform ChipParent
+    {
+        get => chipParent;
+    }
+
     private void Awake() => Refresh();
 
     public void AddChip(Gate chip)
@@ -23,7 +28,7 @@ public class ChipDraggingUI : MonoBehaviour
             DestroyImmediate(uiParent.GetChild(0).gameObject);
         }
 
-        foreach (var chip in gates)
+        foreach (Gate chip in gates)
         {
             GatePreview prev = Instantiate(previewPrefab, uiParent);
             prev.nameText.text = chip.chipName;

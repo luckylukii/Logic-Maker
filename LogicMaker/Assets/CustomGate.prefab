@@ -132,11 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b563d8fcb154ae48a2fb4cc3314029b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 1867013294340241018}
   pins: []
   chipName: 
   graphicsObject: {fileID: 2883685420431887735}
   nameText: {fileID: 3711276301643063646}
-  pinPrefab: {fileID: 946997753363552405, guid: 3296a9dcf62ed334ab6305dd58cf8a3f, type: 3}
+  pinPrefab: {fileID: -4574186232674459561, guid: 3296a9dcf62ed334ab6305dd58cf8a3f, type: 3}
 --- !u!61 &7724769918029413360
 BoxCollider2D:
   m_ObjectHideFlags: 0

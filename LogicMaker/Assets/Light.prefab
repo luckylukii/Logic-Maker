@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6456542845760742149}
+  - {fileID: 8086137941452607079}
   - {fileID: 2034190728600212493}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,10 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c4639319462d44c870793e9db0befe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 3471130531468307520}
+  - {fileID: 8636752334213077932}
   pins:
   - {fileID: 406893763300862082}
   chipName: light
   image: {fileID: 3471130531468307520}
+  hiddenOutput: {fileID: 2235579410940776016}
+  IsInGate: 0
 --- !u!61 &3481526934160424876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -206,10 +212,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   connected: {fileID: 7503626042568816263}
   connectionIndex: 0
   powerState: 0
   pinType: 0
+--- !u!1 &6133550373896646658
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8086137941452607079}
+  - component: {fileID: 2235579410940776016}
+  m_Layer: 0
+  m_Name: HiddenOutputPin
+  m_TagString: Pin
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8086137941452607079
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133550373896646658}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7637622415871711466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2235579410940776016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6133550373896646658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactable: 0
+  connected: {fileID: 7503626042568816263}
+  connectionIndex: 1
+  powerState: 0
+  pinType: 1
 --- !u!1 &7380882076941916414
 GameObject:
   m_ObjectHideFlags: 0

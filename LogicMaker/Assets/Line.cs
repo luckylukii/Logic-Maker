@@ -3,8 +3,8 @@ using UnityEngine;
 public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer _renderer;
-    [HideInInspector] public Pin start, end;
-    [HideInInspector] public PowerState powerState;
+    [HideInNormalInspector] public Pin start, end;
+    [HideInNormalInspector] public PowerState powerState;
 
     private void Update()
     {

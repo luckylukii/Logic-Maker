@@ -4,9 +4,22 @@ using UnityEngine;
 public class Toggle : Gate
 {
     public PowerState powerState;
+    public Pin hiddenInput;
+    public bool IsInGate
+    {
+        get => isInGate;
+        set
+        {
+            isInGate = value;
+            GetComponent<OutputLight>().IsInGate = value;
+        }
+    }
+    private bool isInGate = false;
 
     private void OnMouseDown()
     {
+        if (isInGate) return;
+
         powerState = powerState switch
         {
             PowerState.HIGH => PowerState.LOW,

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5346736466019591983}
   - component: {fileID: 8860897280048612251}
-  - component: {fileID: 4720930724987620027}
+  - component: {fileID: -4574186232674459561}
   m_Layer: 0
   m_Name: UnitializedPin
   m_TagString: Pin
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4720930724987620027
+--- !u!114 &-4574186232674459561
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,10 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 946997753363552405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
+  m_Script: {fileID: 11500000, guid: ef6f0ce38fd3198468174121680b5486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   connected: {fileID: 0}
   connectionIndex: 0
   powerState: 0
   pinType: 0
+  connected: {fileID: 0}
