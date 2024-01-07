@@ -352,6 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   connected: {fileID: 8655050155115948819}
   connectionIndex: 0
   powerState: 0
@@ -453,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   connected: {fileID: 8655050155115948819}
   connectionIndex: 1
   powerState: 0
@@ -508,6 +510,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a4255cb1e58064eb690b6116667720, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 49199710807179634}
+  - {fileID: 8982497070883670165}
+  - {fileID: 5185152317647429005}
+  - {fileID: 2601903957795429034}
+  textElements:
+  - {fileID: 4994113245772093291}
+  colliders:
+  - {fileID: 8368311876569624216}
   pins:
   - {fileID: 1210014809412813671}
   - {fileID: 8598192884494368661}
@@ -667,6 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9722f9309c46944c9cd5263f870719a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactable: 1
   connected: {fileID: 8655050155115948819}
   connectionIndex: 2
   powerState: 0

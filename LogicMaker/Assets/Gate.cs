@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Gate : ToggleableGraphics
+public class Gate : ComponentToggler
 {
     public Pin[] pins;
     public string chipName;

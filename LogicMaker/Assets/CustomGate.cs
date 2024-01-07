@@ -14,7 +14,7 @@ public class CustomGate : Gate
 
     private const float COLLIDER_SCALE_REDUCTION_X = 0.3f;
 
-    [System.NonSerialized] new public ConnectingPin[] pins;
+    [NonSerialized] new public ConnectingPin[] pins;
 
     [SerializeField] private Transform graphicsObject;
     [SerializeField] private TMP_Text nameText;
@@ -44,8 +44,8 @@ public class CustomGate : Gate
     private void MoveGates()
     {
         Converter<ConnectingPin, SpriteRenderer> conv = new((c) => c.GetComponent<SpriteRenderer>());
-        SpriteRenderer[] rends = Array.ConvertAll(pins, conv);
-        renderers.AddRange(rends);
+        SpriteRenderer[] renderers = Array.ConvertAll(pins, conv);
+        base.renderers.AddRange(renderers);
 
         // hacky solution but I can't be bothered to find a good way
         // unity transforms are weird
@@ -53,7 +53,7 @@ public class CustomGate : Gate
         {
             foreach (Transform child in transform.parent)
             {
-                child.GetComponent<ToggleableGraphics>().SetGraphicsActive(false);
+                child.GetComponent<ComponentToggler>().SetGraphicsActive(false);
 
                 child.SetParent(transform);
             }
@@ -84,45 +84,41 @@ public class CustomGate : Gate
 
         pins = new ConnectingPin[numInputPins + numOutputPins];
 
-        // Input Pins
-        for (int i = 0; i < numInputPins; i++)
+        for (int i = 0; i < numInputPins + numOutputPins; i++)
         {
             pins[i] = Instantiate(pinPrefab, transform);
 
-            inputs[i].IsInGate = true;
-
-            CalculatePinPosition(i, inputPinYStartPos, PIN_INPUT_POSITION_X);
+            bool isInputPin = i < numInputPins;
 
             pins[i].connectionIndex = i;
 
-            pins[i].connected = inputs[i].hiddenInput;
+            if (isInputPin)
+            {
+                inputs[i].IsInGate = true;
 
-            pins[i].pinType = PinType.Input;
+                pins[i].connected = inputs[i].hiddenInput;
+                pins[i].pinType= PinType.Input;
+
+                float y = inputPinYStartPos + CalculateYPosOffset(i);
+                float x = PIN_INPUT_POSITION_X;
+
+                pins[i].transform.localPosition = new Vector2(x, y);
+            }
+            else
+            {
+                int j = i - numInputPins;
+
+                outputs[j].IsInGate = true;
+
+                pins[i].connected = outputs[j].hiddenOutput;
+                pins[i].pinType = PinType.Output;
+
+                float y = outputPinYStartPos + CalculateYPosOffset(j);
+                float x = PIN_OUTPUT_POSITION_X;
+
+                pins[i].transform.localPosition = new Vector2(x, y);
+            }
         }
-
-        // Output Pins
-        for (int i = 0; i < numOutputPins; i++)
-        {
-            int j = i + numInputPins;
-
-            pins[j] = Instantiate(pinPrefab, transform);
-
-            inputs[i].IsInGate = true;
-
-            CalculatePinPosition(i, outputPinYStartPos, PIN_OUTPUT_POSITION_X);
-
-            pins[j].connectionIndex = j;
-
-            pins[j].connected = outputs[i].hiddenOutput;
-
-            pins[j].pinType = PinType.Output;
-        }
-    }
-    private void CalculatePinPosition(int i, float startPosY, float xPos)
-    {
-        float y = startPosY - CalculateYPosOffset(i);
-
-        pins[i].transform.localPosition = new Vector2(xPos, y);
     }
     private float CalculateYPosOffset(float i) => i * PIN_DISTRIBUTION_LENGTH;
 }

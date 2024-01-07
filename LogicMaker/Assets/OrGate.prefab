@@ -515,6 +515,10 @@ MonoBehaviour:
   - {fileID: 8303373676507923346}
   - {fileID: 6972227238329123783}
   - {fileID: 4249854818269835001}
+  textElements:
+  - {fileID: 1387975937791618202}
+  colliders:
+  - {fileID: 138030980282656503}
   pins:
   - {fileID: 4434533553216137695}
   - {fileID: 171954661915365519}

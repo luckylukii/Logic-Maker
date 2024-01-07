@@ -34,9 +34,9 @@ public class DrawManager : MonoBehaviour
     {
         GameObject nearestPin = NearestPinFromMousePos(out float distance);
 
-        if (nearestPin == null || !nearestPin.GetComponent<Pin>().interactable) return;
+        if (nearestPin == null) return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && nearestPin.GetComponent<Pin>().interactable)
         {
             if (distance <= SNAP_DISTANCE)
             {
@@ -61,7 +61,7 @@ public class DrawManager : MonoBehaviour
             //Checks if start or end is null (that means either two inputs or two ouputs are connected)
             bool invalidWire = _currentLine.start == null || _currentLine.end == null;
 
-            if (distance > SNAP_DISTANCE || nearestPin == startPin || invalidWire)
+            if (distance > SNAP_DISTANCE || nearestPin == startPin || invalidWire || !nearestPin.GetComponent<Pin>().interactable)
             {
                 CancelCurrentLine();
                 return;
@@ -116,10 +116,9 @@ public class DrawManager : MonoBehaviour
 
     private void HandleErasing()
     {
-        if (!Input.GetMouseButtonDown(0))
-            return;
-
         //save performance by returning if left mouse not pressed
+        if (!Input.GetMouseButtonDown(0)) return;
+
         float nearestDistance = float.MaxValue;
         GameObject nearestLine = null;
         

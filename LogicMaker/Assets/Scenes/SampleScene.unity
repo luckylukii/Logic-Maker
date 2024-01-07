@@ -355,16 +355,6 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  prefab: {fileID: 8594365152281205494, guid: 8152c4c5ee8ea7f46aabcb3bc3783b99, type: 3}
-  inputs: 1
-  outputs: 1
-  Name: not (c)
-  inputsArr:
-  - arr: 00000000
-  - arr: 01000000
-  outputsArr:
-  - arr: 01000000
-  - arr: 00000000
 --- !u!4 &265292062
 Transform:
   m_ObjectHideFlags: 0
@@ -392,6 +382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e69a63cb9413a40bd1aa1141720fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputs: []
+  outputs: []
   prefab: {fileID: 8594365152281205494, guid: 8152c4c5ee8ea7f46aabcb3bc3783b99, type: 3}
   UI: {fileID: 889500383}
 --- !u!1 &345058500

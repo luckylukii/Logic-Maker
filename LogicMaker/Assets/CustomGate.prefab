@@ -134,6 +134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 1867013294340241018}
+  textElements:
+  - {fileID: 3711276301643063646}
+  colliders:
+  - {fileID: 7724769918029413360}
   pins: []
   chipName: 
   graphicsObject: {fileID: 2883685420431887735}

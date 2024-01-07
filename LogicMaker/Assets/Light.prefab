@@ -52,6 +52,9 @@ MonoBehaviour:
   renderers:
   - {fileID: 3471130531468307520}
   - {fileID: 8636752334213077932}
+  textElements: []
+  colliders:
+  - {fileID: 3481526934160424876}
   pins:
   - {fileID: 406893763300862082}
   chipName: light

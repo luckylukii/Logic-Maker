@@ -13,8 +13,12 @@ public class GatePreview : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Gate inst = Instantiate(associatedPrefab, parent);
+        var gen = CustomChipGenerator.Instance;
 
-        if (inst.TryGetComponent<Toggle>(out var t)) CustomChipGenerator.Instance.inputs.Add(t);
-        else if (inst.TryGetComponent<OutputLight>(out var l)) CustomChipGenerator.Instance.outputs.Add(l);
+        if (inst.TryGetComponent<Toggle>(out var t)) gen.inputs.Add(t);
+        else if (inst.TryGetComponent<OutputLight>(out var l)) gen.outputs.Add(l);
+        else return; //used to minimize code duplication
+
+        gen.SortByPosition();
     }
 }
