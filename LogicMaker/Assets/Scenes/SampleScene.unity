@@ -1030,7 +1030,7 @@ MonoBehaviour:
   - {fileID: 8655050155115948819, guid: 9673e3eaf6c2bb6449c7ccc6151af630, type: 3}
   - {fileID: 7489577622973107131, guid: 8715453876736c244af2f3225ba5f832, type: 3}
   - {fileID: 1220609504959414919, guid: 44741361341a34d4da91b4f171b59dfc, type: 3}
-  - {fileID: 5927442778064782077, guid: bf70a5d6ee01c2647ab90511804b7395, type: 3}
+  - {fileID: 7845957405210684894, guid: bf70a5d6ee01c2647ab90511804b7395, type: 3}
   - {fileID: 7503626042568816263, guid: 28540c0897739074384d287978fd1955, type: 3}
 --- !u!1 &908549030
 GameObject:
@@ -1876,6 +1876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632162af137840749afa4fb9bc24e946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useVertexDraw: 1
   linePrefab: {fileID: 307945033101473294, guid: 5384719e00838d74ebcdaf835ed1346d, type: 3}
 --- !u!4 &2081499185
 Transform:

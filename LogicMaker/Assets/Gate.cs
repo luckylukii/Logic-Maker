@@ -9,11 +9,11 @@ public class Gate : ComponentToggler
     {
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            HandleSceneChipLogic();
+            RemoveSceneInOut();
             Destroy(gameObject);
         }
     }
-    private void HandleSceneChipLogic()
+    private void RemoveSceneInOut()
     {
         if (TryGetComponent<Toggle>(out var t)) CustomChipGenerator.Instance.inputs.Remove(t);
         else if (TryGetComponent<OutputLight>(out var l)) CustomChipGenerator.Instance.outputs.Remove(l);

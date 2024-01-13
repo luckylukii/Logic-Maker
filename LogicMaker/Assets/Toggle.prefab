@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: 1
-  connected: {fileID: 5927442778064782077}
+  connected: {fileID: 0}
   connectionIndex: 0
   powerState: 0
   pinType: 1
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: 0
-  connected: {fileID: 5927442778064782077}
+  connected: {fileID: 0}
   connectionIndex: 1
   powerState: 0
   pinType: 0
@@ -244,10 +244,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8159275613167639765}
-  - component: {fileID: 5927442778064782077}
   - component: {fileID: 1945585850899906466}
   - component: {fileID: 7522663726819535125}
-  - component: {fileID: 7551616941962101610}
+  - component: {fileID: 7845957405210684894}
+  - component: {fileID: 4420414969350111766}
   m_Layer: 0
   m_Name: Toggle
   m_TagString: Toggle
@@ -273,29 +273,6 @@ Transform:
   - {fileID: 1504384492487369539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5927442778064782077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6599879127441832616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9caeda3a8dfbf444b0ee6fc5f2a5f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 2301753449296647565}
-  - {fileID: 1079717051918961593}
-  textElements: []
-  colliders:
-  - {fileID: 1945585850899906466}
-  pins:
-  - {fileID: 4542430190656413750}
-  chipName: toggle
-  powerState: 0
-  hiddenInput: {fileID: 6621324407150328631}
 --- !u!61 &1945585850899906466
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -328,7 +305,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.075, y: 0}
+  m_Offset: {x: -0.1, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -353,7 +330,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ed0086195256646a9ea25bbf09ae93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7551616941962101610
+  moveX: 1
+  moveY: 1
+--- !u!114 &7845957405210684894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6599879127441832616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9caeda3a8dfbf444b0ee6fc5f2a5f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 2301753449296647565}
+  - {fileID: 1079717051918961593}
+  textElements: []
+  colliders:
+  - {fileID: 1945585850899906466}
+  pins:
+  - {fileID: 4542430190656413750}
+  chipName: toggle
+  powerState: 0
+  hiddenInput: {fileID: 6621324407150328631}
+--- !u!114 &4420414969350111766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

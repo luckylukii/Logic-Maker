@@ -1,5 +1,7 @@
 using System;
+using System.Net.NetworkInformation;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -58,6 +60,7 @@ public class CustomGate : Gate
                 child.SetParent(transform);
             }
         }
+        GetComponent<ComponentToggler>().SetGraphicsActive(true);
     }
     private void FitSize()
     {
@@ -79,8 +82,8 @@ public class CustomGate : Gate
     }
     private void InitPins()
     {
-        float inputPinYStartPos = CalculateYPosOffset(numInputPins - 1) / 2;
-        float outputPinYStartPos = CalculateYPosOffset(numOutputPins - 1) / 2;
+        float inputPinYStartPos = -CalculateYPosOffset(numInputPins - 1) / 2;
+        float outputPinYStartPos = -CalculateYPosOffset(numOutputPins - 1) / 2;
 
         pins = new ConnectingPin[numInputPins + numOutputPins];
 
@@ -91,12 +94,13 @@ public class CustomGate : Gate
             bool isInputPin = i < numInputPins;
 
             pins[i].connectionIndex = i;
+            pins[i].connected = this;
 
             if (isInputPin)
             {
                 inputs[i].IsInGate = true;
 
-                pins[i].connected = inputs[i].hiddenInput;
+                pins[i].connectedPin = inputs[i].hiddenInput;
                 pins[i].pinType= PinType.Input;
 
                 float y = inputPinYStartPos + CalculateYPosOffset(i);
@@ -110,7 +114,7 @@ public class CustomGate : Gate
 
                 outputs[j].IsInGate = true;
 
-                pins[i].connected = outputs[j].hiddenOutput;
+                pins[i].connectedPin = outputs[j].hiddenOutput;
                 pins[i].pinType = PinType.Output;
 
                 float y = outputPinYStartPos + CalculateYPosOffset(j);
